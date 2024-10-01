@@ -3,9 +3,16 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
+    # tells the Eureka server what host name it has to consider(inside local system, the hostname will be localhost
+    hostname: localhost 
   client:
-    fetchRegistry: false
+    # fetchRegistry: false => we don't want eurekaserver to fetch the registry details of other microservices. The
+    # eureka server never going to call the microservices
+    fetchRegistry: false 
+    # registerWithEureka: false => Don't register with yourself, and don't expose your details into the registry
+    # of service discovery
     registerWithEureka: false
     serviceUrl:
+    # URL where the eurekaserver is going to expose its functionality and other microservices they can try to connect
+    # to register their details or to discover other service details
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
